@@ -1,7 +1,7 @@
 # Pydantic for LLM Applications
 
 1. [Introduction](#1)
-2. Pydantic fundamentals](#2)
+2. [Pydantic fundamentals](#2)
 
 
 ## Introduction
@@ -13,6 +13,10 @@
 - We can use different methods to get structured responses from LLM and also validate those responses
 - We can validate data in any software system, like data that can be put into a system by humans or external APIs and data sources or any data that can be passed from one component to another in a software system 
 
+## Why we need Pydantic HERE - SECOND VIDEO
+- With Pydantic we can define a Pydantic data model, were we can define field names and format 
+
+- 
 ## Pydantic fundamentals 
 
 - 
