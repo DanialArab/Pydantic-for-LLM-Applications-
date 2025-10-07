@@ -28,7 +28,11 @@ We have two ways to get structured outputs from LLM:
 
     valid_data = CustomerQuery.model_validate_json(JSON_LLM_output)
 
-If the LLM response contains unexpected text or formatting or if the JSON itself is not properly formatted then there would be a failure with validation error. On the other hand, if the JSON format is valid but the data contained int he JSON does not match the model then agin there would eb a failure with Data Validation error. 
+If the LLM response contains unexpected text or formatting or if the JSON itself is not properly formatted then there would be a failure with validation error. On the other hand, if the JSON format is valid but the data contained int he JSON does not match the model then agin there would eb a failure with Data Validation error. If no error pops in means that data validation is passed and the validated data can be safely passed to the next component in the system. But if there is an error and data is not validated, we can simply catch that validation error and pass it back to the LLm with a follow up request asking to correct the proiblem that caused the error, this opften times works pretty well. We can run through multiple error catching and correction cycles if we don't get good results straight away.
+
+![](https://github.com/DanialArab/images/blob/main/Pydantic_for_LLM_applications/pydantic_error_catchin_correctio_cycle.png)
+
+2. But there is an even more reliable way of doing this. 
 
 
 ## Pydantic fundamentals 
