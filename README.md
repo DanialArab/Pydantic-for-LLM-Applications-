@@ -17,14 +17,18 @@
 
 The response from LLM may have additional text like **"Here is the JSON output you requested!"** or it may add some other formatting like **triple backticks markdown formatting** which is really common in LLM responses when we are asking for JSON. Betond these, the LLM response may not contain all the fields we expect or could end up being in a fromat which may not be useable. So these unpredactibality of the response format makes it really hard to rely on LLMs to directly provide us with a structured output. This is Pydantic may come to rescue
 
-- With Pydantic we can define a **Pydantic data model**, that specify the data structure and type we expect model like:
+- With Pydantic we can define a **Pydantic data model**, that specify the data structure and type we expect like:
 
 ![](https://github.com/DanialArab/images/blob/main/Pydantic_for_LLM_applications/pydantic_data_model.png)
 
-With pydantic data model we define both field names and data types for each field in the model. We can use this Pydantic data model to validate the LLM response to ensure it matches our expectations. 
+With Pydantic data model, we define both field names and data types for each field in the model. We can use this Pydantic data model to validate the LLM response to ensure it matches our expectations. 
 
 We have two ways to get structured outputs from LLM:
+1. The simplest way is to prompt the LLM to give us the structured output through giving it an example of the preferred structure in the prompt, and then take that LLM response which we hope to be in JSON fromat and attepmts to craete an instance of the data model like the CustomerQuery data model in the above screenshot. We use LLM response as input like:
 
+    valid_data = CustomerQuery.model_validate_json(JSON_LLM_output)
+
+If the LLM response contains unexpected text or formatting or if the JSON itself is not properly formatted then there would be a failure with validation error. On the other hand, if the JSON format is valid but the data contained int he JSON does not match the model then agin there would eb a failure with Data Validation error. 
 
 
 ## Pydantic fundamentals 
