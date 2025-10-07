@@ -15,20 +15,21 @@
 
 ## Why we need Pydantic 
 
-The response from LLM may have additional text like **"Here is the JSON output you requested!"** or it may add some other formatting like **triple backticks markdown formatting** which is really common in LLM responses when we are asking for JSON. Betond these, the LLM response may not contain all the fields we expect or could end up being in a fromat which may not be useable. So these unpredactibality of the response format makes it really hard to rely on LLMs to directly provide us with a structured output. This is Pydantic may come to rescue
+The response from an LLM may have additional text like **"Here is the JSON output you requested!"** or it may add some other formatting like **triple backticks markdown formatting** which is really common in LLM responses when we are asking for JSON. Beyond these, the LLM response may not contain all the fields we expect or could end up being in a format which may not be usable. So this unpredictability of the response format makes it really hard to rely on LLMs to directly provide us with a structured output. This is Pydantic may come to rescue
 
-- With Pydantic we can define a **Pydantic data model**, that specify the data structure and type we expect like:
+- With Pydantic we can define a **Pydantic data model**, that specifies the data structure and type we expect, like:
 
 ![](https://github.com/DanialArab/images/blob/main/Pydantic_for_LLM_applications/pydantic_data_model.png)
 
 With Pydantic data model, we define both field names and data types for each field in the model. We can use this Pydantic data model to validate the LLM response to ensure it matches our expectations. 
 
-We have two ways to get structured outputs from LLM:
-1. The simplest way is to prompt the LLM to give us the structured output through giving it an example of the preferred structure in the prompt, and then take that LLM response which we hope to be in JSON fromat and attepmts to craete an instance of the data model like the CustomerQuery data model in the above screenshot. We use LLM response as input like:
+We have two ways to get structured outputs from an LLM:
+
+1. The simplest way is to prompt the LLM to give us the structured output through giving it an example of the preferred structure in the prompt, and then take that LLM response which we hope to be in JSON format and attepmt to create an instance of the data model like the CustomerQuery data model in the above screenshot. We use LLM response as input, like:
 
     valid_data = CustomerQuery.model_validate_json(JSON_LLM_output)
 
-If the LLM response contains unexpected text or formatting or if the JSON itself is not properly formatted then there would be a failure with validation error. On the other hand, if the JSON format is valid but the data contained int he JSON does not match the model then agin there would eb a failure with Data Validation error. If no error pops in means that data validation is passed and the validated data can be safely passed to the next component in the system. But if there is an error and data is not validated, we can simply catch that validation error and pass it back to the LLm with a follow up request asking to correct the proiblem that caused the error, this opften times works pretty well. We can run through multiple error catching and correction cycles if we don't get good results straight away.
+If the LLM response contains unexpected text or formatting or if the JSON itself is not properly formatted, then there would be a failure with a validation error. On the other hand, if the JSON format is valid but the data contained in the JSON does not match the model, then again there would be a failure with a Data Validation error. If no error pops up, it means that data validation is passed and the validated data can be safely passed to the next component in the system. But if there is an error and data is not validated, we can simply catch that validation error and pass it back to the LLm with a follow-up request asking to correct the problem that caused the error, this often works pretty well. We can run through multiple error-catching and correction cycles if we don't get good results straight away.
 
 ![](https://github.com/DanialArab/images/blob/main/Pydantic_for_LLM_applications/pydantic_error_catchin_correctio_cycle.png)
 
