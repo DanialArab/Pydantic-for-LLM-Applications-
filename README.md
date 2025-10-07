@@ -32,7 +32,7 @@ If the LLM response contains unexpected text or formatting or if the JSON itself
 
 ![](https://github.com/DanialArab/images/blob/main/Pydantic_for_LLM_applications/pydantic_error_catchin_correctio_cycle.png)
 
-2. But there is an even more reliable way of doing this. 
+2. But there is an even more reliable way of doing this. HERE
 
 
 ## Pydantic fundamentals 
