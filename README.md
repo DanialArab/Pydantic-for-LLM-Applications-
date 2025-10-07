@@ -13,10 +13,20 @@
 - We can use different methods to get structured responses from LLM and also validate those responses
 - We can validate data in any software system, like data that can be put into a system by humans or external APIs and data sources or any data that can be passed from one component to another in a software system 
 
-## Why we need Pydantic HERE - SECOND VIDEO
-- With Pydantic we can define a Pydantic data model, were we can define field names and format 
+## Why we need Pydantic 
 
-- 
+The response from LLM may have additional text like **"Here is the JSON output you requested!"** or it may add some other formatting like **triple backticks markdown formatting** which is really common in LLM responses when we are asking for JSON. Betond these, the LLM response may not contain all the fields we expect or could end up being in a fromat which may not be useable. So these unpredactibality of the response format makes it really hard to rely on LLMs to directly provide us with a structured output. This is Pydantic may come to rescue
+
+- With Pydantic we can define a **Pydantic data model**, that specify the data structure and type we expect model like:
+
+![](https://github.com/DanialArab/images/blob/main/Pydantic_for_LLM_applications/pydantic_data_model.png)
+
+With pydantic data model we define both field names and data types for each field in the model. We can use this Pydantic data model to validate the LLM response to ensure it matches our expectations. 
+
+We have two ways to get structured outputs from LLM:
+
+
+
 ## Pydantic fundamentals 
 
 - 
